@@ -223,7 +223,7 @@ $$(dramfs_mklfs$(2)_bin): $$(dramfs_mklfs$(2)_c_objs)
 .PHONY: dramfs_mklfs$(2)_install
 dramfs_mklfs$(2)_install: $$(dramfs_mklfs$(2)_bin) $$(dramfs_mklfs_data)
 	install -m 755 -p -D -t $$(bindir) $$^
-	ln -nsf $$(bindir)/$$(<F) $$(dir $$(shell which $$(CC)))/$$(host)-$$(<F)
+	ln -nsf $$(bindir)/$$(<F) $$(bindir)/../../bin/$$(host)-$$(<F)
 
 dramfs_mklfs_objs := $$(dramfs_mklfs$(2)_c_objs)
 dramfs_mklfs_install := dramfs_mklfs$(2)_install
@@ -255,7 +255,7 @@ dramfs_mklfs: $(dramfs_mklfs_bin)
 install: $(libgloss_install) $(dramfs_crt_install) $(dramfs_mklfs_install)
 	$(if $(filter $(realpath $(libdir)),\
 	$(foreach d,$(call searchdirs),$(realpath $(d)))),,\
-	$(error libdir is not in $(CC) library search path: $(libdir)))
+	$(warning libdir is not in $(CC) library search path: $(libdir)))
 
 
 #
